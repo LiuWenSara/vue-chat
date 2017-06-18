@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "express": "^4.15.3",
+    "iview": "^2.0.0-rc.17",
     "less": "^2.7.2",
     "mongoose": "^4.10.6",
     "socket.io": "^2.0.3",
