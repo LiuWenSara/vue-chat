@@ -1,5 +1,7 @@
 import express from "express";
 import config from "config/index.js";
+import User from "model/user.js";
+import Message from "/model/message.js";
 const port = process.env.PORT || config.dev.port;
 
 const app = express();
@@ -34,6 +36,11 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+app.use(function (req ,res , next) {
+  const _user = req.session.user;
+  app.locals.user = _user;
+  next();
+});
 
 const env = process.env.NODE_ENV || 'development';
 if ('development' === app.get('env')) {
@@ -46,7 +53,6 @@ if ('development' === app.get('env')) {
 const server = app.listen(port);
 
 const io = require("socket.io")(server);
-import Message from "/model/message.js";
 global.users = {};
 
 io.on("connection",function (socket) {
@@ -93,5 +99,88 @@ io.on("connection",function (socket) {
       console.log(socket.name + '退出' + socket.roomid);
     }
   });
+  app.post('/user/register',function (req ,res) {
+    const _user = req.body;
+    User.findOne({name: _user.name} ,function (err, user) {
+      if (err) {
+        console.log(err);
+      }
+      if (user) {
+        res.json({
+          errno: 1,
+          data: '用户已存在'
+        });
+      } else {
+        const user = new User(_user);
+        user.save(function (err ,user) {
+          if (err) {
+            console.log(err);
+          }
+          res.json({
+            errno: 0,
+            data: '注册成功'
+          })
+        })
+      }
+    });
+  });
+  app.post('/user/login',function (req ,res) {
+    const _user = req.body;
+    const _name = _user.name;
+    const _password = _user.password;
+    User.findOne({name: _name} ,function (err, user) {
+      if (err) {
+        console.log(err);
+      }
+      if (!user) {
+        res.json({
+          errno: 1,
+          data: '用户不存在'
+        });
+      } else {
+        if (_password) {
+          const user = new User(_user);
+          user.isRight(_password ,function (err , isMatch) {
+            if (err) {
+              console.log(err);
+            }
+            if (isMatch) {
+              req.session.name = _name;
+              res.json({
+                errno: 0,
+                data: '登录成功',
+                src: user.src,
+                name: _name
+              });
+            } else {
+              res.json({
+                errno: 1,
+                data: '密码不正确'
+              });
+            }
+          });
+        } else {
+          res.json({
+            errno: 1,
+            data: '登录失败'
+          });
+        }
+      }
+    });
+  });
+  app.post('/message',function (req ,res) {
+    const _roomid = req.query.roomid;
+    Message.find({roomid: _roomid} ,function(err ,message) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json({
+          errno: 0,
+          data: message
+        });
+      }
+    })
+  });
 });
+
 
