@@ -1,15 +1,29 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
+import Layout from '../components/Layout.vue'
+import Home from '../components/Home.vue'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'layout',
+      component: Layout,
+      redirect: {name: 'home'},
+      children: [
+        {
+          path: '/home',
+          name: 'home',
+          component: Home,
+        },
+        {
+          path: '/personal',
+          name: 'personal',
+          component: Personal,
+        }
+      ]
     }
   ]
 })
