@@ -61,20 +61,17 @@ io.on("connection",function (socket) {
       name: obj.name,
       text: obj.text,
       roomid: obj.roomid,
-      src: obj.roomid,
-      img: obj.img
+      imgSrc: obj.imgSrc,
     };
     io.to(obj.roomid).emit('message', msg);
     console.log(obj.name + '发布' + obj.text);
-    if (obj.img === ''){
-      const message = new Message(mess);
-      message.save(function (err, mess) {
-        if (err) {
-          console.log(err);
-        }
-        console.log(mess);
-      })
-    }
+    const message = new Message(msg);
+    message.save(function (err, msg) {
+      if (err) {
+        console.log(err);
+      }
+      console.log(msg);
+    });
   });
   socket.on("login",function (obj) {
     socket.name = obj.name;
@@ -116,9 +113,12 @@ io.on("connection",function (socket) {
           if (err) {
             console.log(err);
           }
+          req.session.name = _user.name;
           res.json({
             errno: 0,
-            data: '注册成功'
+            data: '注册成功',
+            imgSrc: user.imgSrc,
+            name: _name
           })
         })
       }
@@ -149,7 +149,7 @@ io.on("connection",function (socket) {
               res.json({
                 errno: 0,
                 data: '登录成功',
-                src: user.src,
+                imgSrc: user.imgSrc,
                 name: _name
               });
             } else {

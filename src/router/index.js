@@ -2,8 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '../components/Layout.vue'
 import Home from '../components/Home.vue'
+import Personal from '../components/Personal.vue'
 
-Vue.use(Router);
+Vue.use(Router)
 
 export default new Router({
   routes: [
@@ -16,12 +17,12 @@ export default new Router({
         {
           path: '/home',
           name: 'home',
-          component: Home,
+          component: Home
         },
         {
           path: '/personal',
           name: 'personal',
-          component: Personal,
+          component: Personal
         }
       ]
     }

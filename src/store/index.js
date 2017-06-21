@@ -1,15 +1,15 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import axios from "axios";
+import Vue from 'vue'
+import Vuex from 'vuex'
+import axios from 'axios'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
     socket: '',
     user: {
       name: '',
-      src: '',
+      imgsrc: '',
       roomid: ''
     },
     roomdetail: {
@@ -20,6 +20,7 @@ const store = new Vuex.Store({
     messhistory: {
       infos: []
     },
+    alarmtext: '',
     chattoggle: false,
     logintoggle: true,
     registertoggle: false
@@ -27,8 +28,9 @@ const store = new Vuex.Store({
   getters: {
     getsocket: state => state.socket,
     getusername: state => state.user.name,
-    getusersrc: state => state.user.src,
-    getuserroom: state => state.user.room,
+    getalarmtext: state => state.alarmtext,
+    getusersrc: state => state.user.imgsrc,
+    getuserroomid: state => state.user.roomid,
     getid: state => state.roomdetail.id,
     getusers: state => state.roomdetail.users,
     getinfos: state => state.roomdetail.infos,
@@ -41,46 +43,81 @@ const store = new Vuex.Store({
     setgetsocket (state, data) {
       state.socket = data
     },
-    setusername(state, data) {
+    setusername (state, data) {
       state.user.name = data
     },
-    setusersrc(state, data) {
-      state.user.src = data
+    setuserimgsrc (state, data) {
+      state.user.imgsrc = data
     },
-    setuserroom(state, data) {
+    setuserroom (state, data) {
       state.user.room = data
     },
-    addroomdetailinfos(state, data) {
+    addroomdetailinfos (state, data) {
       state.roomdetail.infos.push(data)
     },
-    setroomdetailinfos(state) {
+    setroomdetailinfos (state) {
       state.roomdetail.infos = []
     },
-    setusers(state, data) {
+    setusers (state, data) {
       state.roomdetail.users = data
     },
-    setmesshistoryinfos(state, data) {
+    setmesshistoryinfos (state, data) {
       state.messhistory.infos = data
     },
-    changechattoggle(state) {
+    changechattoggle (state) {
       state.chattoggle = !state.chattoggle
     },
-    openlogintoggle(state) {
+    openlogintoggle (state) {
       state.logintoggle = true
     },
-    closelogintoggle(state) {
+    closelogintoggle (state) {
       state.logintoggle = false
     },
-    openregistertoggle(state) {
+    openregistertoggle (state) {
       state.registertoggle = true
     },
-    closeregistertoggle(state) {
+    closeregistertoggle (state) {
       state.registertoggle = false
+    },
+    setalarmtext (state, data) {
+      state.alarmtext = data
     }
   },
   actions: {
-
+    regsubmit ({commit}, data) {
+      axios.post('/user/register', data).then(function (data) {
+        if (data.data.errno === 0) {
+          commit('closeregistertoggle')
+          commit('setusername', data.data.name)
+          commit('setuserimgsrc', data.data.imgsrc)
+        } else {
+          commit('setalarmtext', data.data.data)
+        }
+      }).catch(function (err) {
+        console.log(err)
+      })
+    },
+    logsubmit ({commit}, data) {
+      axios.post('/user/login', data).then(function (data) {
+        if (data.data.errno === 0) {
+          commit('closelogintoggle')
+          commit('setusername', data.data.name)
+          commit('setuserimgsrc', data.data.imgsrc)
+        } else {
+          commit('setalarmtext', data.data.data)
+        }
+      }).catch(function (err) {
+        console.log(err)
+      })
+    },
+    showmesshistory ({commit}, data) {
+      axios.get('/message', {params: data}).then(function (data) {
+        commit('setmesshistoryinfos', data.data.data)
+      }).catch(function (err) {
+        console.log(err)
+      })
+    }
   }
-});
+})
 
 export default store

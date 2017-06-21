@@ -1,12 +1,10 @@
 <template>
   <div>
-    <header></header>
-    <div class="content">
+    <!--<header></header>-->
       <router-view></router-view>
-    </div>
   </div>
 </template>
 
 <script>
-  import Header from "Header.vue";
+//  import Header from "Header.vue";
 </script>
