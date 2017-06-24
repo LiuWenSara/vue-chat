@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
     unique: true
   },
   password: String,
-  imgSrc: String,
+  imgsrc: String,
   meta :{
     createAt: {
       default: Date.now(),

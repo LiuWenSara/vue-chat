@@ -86,7 +86,7 @@ io.on("connection",function (socket) {
   });
   socket.on("logout",function (obj) {
     delete global.users[obj.roomid][obj.name];
-    io.to(obj.roomid).emit('login', global.users[obj.roomid]);
+    io.to(obj.roomid).emit('logout', global.users[obj.roomid]);
     console.log(obj.name + '退出' + obj.roomid);
   });
   socket.on("disconnect",function () {

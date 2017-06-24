@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const MessageSchema = new mongoose.Schema({
   username: String,
   roomid: String,
-  imgSrc: String,
+  imgsrc: String,
   time: {
     type: Date,
     default: Date.now()
