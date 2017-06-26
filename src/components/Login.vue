@@ -1,15 +1,21 @@
 <template>
   <div class="login" v-show="getlogintoggle">
-    <form action="">
-      <div class="inp name">
-        <Input v-model="name" placeholder="用户名" style="width: 300px"/>
-      </div>
-      <div class="inp password">
-        <Input v-model="password" placeholder="密码" style="width: 300px"/>
-      </div>
-      <div class="alarm">{{alarmtext}}</div>
-      <button @click="submit">登录</button>
-    </form>
+    <div class="top">
+      <p>欢迎来到Vue聊天室！</p>
+      <p>快来登录吧</p>
+    </div>
+    <div class="form">
+      <form action="">
+        <div class="inp name">
+          <Input type="text" v-model="name" placeholder="用户名" />
+        </div>
+        <div class="inp password">
+          <Input type="password" v-model="password" placeholder="密码"/>
+        </div>
+        <div class="alarm">{{alarmtext}}</div>
+        <Button type="info" @click="submit">登录</Button>
+      </form>
+    </div>
   </div>
 </template>
 

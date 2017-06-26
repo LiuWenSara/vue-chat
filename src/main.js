@@ -6,6 +6,7 @@ import 'iview/dist/styles/iview.css'  // 使用 CSS
 import App from './App'
 import router from './router'
 import store from './store'
+import './assets/styles/main.less'
 
 Vue.use(iView)
 

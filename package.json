@@ -20,6 +20,7 @@
     "express": "^4.15.3",
     "iview": "^2.0.0-rc.17",
     "less": "^2.7.2",
+    "less-loader": "^4.0.4",
     "mongoose": "^4.10.6",
     "morgan": "^1.8.2",
     "socket.io": "^2.0.3",
