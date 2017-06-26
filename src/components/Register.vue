@@ -10,12 +10,12 @@
       <div class="alarm">{{alarmtext}}</div>
       <button @click="submit">注册</button>
     </form>
-    <div >已有账号</div>
+    <div @click="changePlat">已有账号</div>
   </div>
 </template>
 
 <script>
-  import mapGetters from 'vuex'
+  import {mapGetters} from 'vuex'
 
   export default{
     data () {
@@ -26,10 +26,13 @@
       }
     },
     methods: {
+      changePlat() {
+        this.$store.commit('openlogintoggle');
+        this.$store.commit('closeregistertoggle');
+      },
       submit () {
         const name = this.name
         const password = this.password
-        const alarmtext = this.alarmtext
         var imgsrc = '../assets/img' + Math.ceil(Math.random() * 10) + '.jpg'
         if (name !== '' && password !== '') {
           const data = {
@@ -45,9 +48,9 @@
     },
     computed: {
       ...mapGetters([
-        'getregistertoggle'
+        'getregistertoggle',
       ])
-  }
+    }
   }
 </script>
 

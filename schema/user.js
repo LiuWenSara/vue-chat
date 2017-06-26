@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const SALT_NUM = 10;
 const UserSchema = new mongoose.Schema({
@@ -23,16 +23,15 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.pre('save',function (next) {
   const self = this;
-  if(self.isNew){
-    self.createAt = self.updateAt = Date.now();
+  if(this.isNew){
+    this.createAt = this.updateAt = Date.now();
   } else {
-    self.updateAt = Date.now();
+    this.updateAt = Date.now();
   }
   bcrypt.genSalt(SALT_NUM, function(err, salt) {
     if (err) return next(err);
     bcrypt.hash(self.password, salt, function(err, hash) {
       if (err) return next(err);
-
       self.password = hash;
       next();
     });
@@ -47,7 +46,7 @@ UserSchema.methods = {
     })
   }
 };
-UserSchema.static = {
+UserSchema.statics = {
   fetch: function (callback) {
     return this.find({}).sort('meta.updateAt').exec(callback);
   },
@@ -55,3 +54,5 @@ UserSchema.static = {
     return this.findOne({_id: id}).exec(callback);
   }
 };
+
+module.exports = UserSchema

@@ -22,8 +22,8 @@ const store = new Vuex.Store({
     },
     alarmtext: '',
     chattoggle: false,
-    logintoggle: true,
-    registertoggle: false
+    logintoggle: false,
+    registertoggle: true
   },
   getters: {
     getsocket: state => state.socket,
@@ -49,8 +49,8 @@ const store = new Vuex.Store({
     setuserimgsrc (state, data) {
       state.user.imgsrc = data
     },
-    setuserroom (state, data) {
-      state.user.room = data
+    setuserroomid (state, data) {
+      state.user.roomid = data
     },
     addroomdetailinfos (state, data) {
       state.roomdetail.infos.push(data)
@@ -88,8 +88,7 @@ const store = new Vuex.Store({
       axios.post('/user/register', data).then(function (data) {
         if (data.data.errno === 0) {
           commit('closeregistertoggle')
-          commit('setusername', data.data.name)
-          commit('setuserimgsrc', data.data.imgsrc)
+          commit('openlogintoggle')
         } else {
           commit('setalarmtext', data.data.data)
         }
@@ -110,7 +109,7 @@ const store = new Vuex.Store({
         console.log(err)
       })
     },
-    showmesshistory ({commit}, data) {
+    showmesshistory({commit}, data) {
       axios.get('/message', {params: data}).then(function (data) {
         commit('setmesshistoryinfos', data.data.data)
       }).catch(function (err) {

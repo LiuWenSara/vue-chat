@@ -1,7 +1,7 @@
-import express from "express";
-import config from "config/index.js";
-import User from "model/user.js";
-import Message from "/model/message.js";
+const express = require("express");
+const config = require("./config/index.js");
+const User = require("./model/user.js");
+const Message = require("./model/message.js");
 const port = process.env.PORT || config.dev.port;
 
 const app = express();
@@ -15,13 +15,13 @@ router.get('/', function (req, res, next) {
 
 app.use(router);
 
-import mongoose from "mongoose";
+const mongoose = require("mongoose")
 //node.js的HTTP请求记录器中间件
-import morgan from "morgan";
+const morgan = require("morgan")
 //session 储存
-import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
-import cookieSession from "cookie-session";
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const cookieSession = require("cookie-session");
 // 用于异步回调
 mongoose.Promise = require('bluebird');
 global.db = mongoose.connect("mongodb://localhost:27017/chat");
@@ -31,7 +31,7 @@ app.use(bodyParser.json());//bodyParser.json是用来解析json数据格式的�
 app.use(bodyParser.urlencoded({extended: true}));//bodyParser.urlencoded则是用来解析我们通常的form表单提交的数据，也就是请求头中包含这样的信息： Content-Type: application/x-www-form-urlencoded
 // sesstion 存储
 app.use(cookieParser());
-app.use(session({
+app.use(cookieSession({
   secret: 'vuechat',
   resave: false,
   saveUninitialized: true
@@ -61,7 +61,7 @@ io.on("connection",function (socket) {
       name: obj.name,
       text: obj.text,
       roomid: obj.roomid,
-      imgSrc: obj.imgSrc,
+      imgSrc: obj.imgSrc
     };
     io.to(obj.roomid).emit('message', msg);
     console.log(obj.name + '发布' + obj.text);

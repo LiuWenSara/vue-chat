@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const MessageSchema = new mongoose.Schema({
   username: String,
@@ -14,7 +14,7 @@ const MessageSchema = new mongoose.Schema({
   }
 });
 
-UserSchema.static = {
+MessageSchema.static = {
   fetch: function (callback) {
     return this.find({}).sort('time').exec(callback);
   },
@@ -23,3 +23,4 @@ UserSchema.static = {
   }
 };
 
+module.exports = MessageSchema

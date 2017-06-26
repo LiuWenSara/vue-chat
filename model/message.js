@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import MessageSchema from "../schema/message.js";
+const mongoose = require("mongoose");
+const MessageSchema = require("../schema/message.js");
 
 const Message = mongoose.model('Message', MessageSchema);
 
