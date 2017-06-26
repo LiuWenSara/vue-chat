@@ -39,7 +39,7 @@
       submit () {
         const name = this.name
         const password = this.password
-        var imgsrc = '../assets/img' + Math.ceil(Math.random() * 10) + '.jpg'
+        var imgsrc = './static/img/' + Math.ceil(Math.random() * 10) + '.jpg'
         if (name !== '' && password !== '') {
           const data = {
             name: name,

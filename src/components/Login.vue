@@ -34,7 +34,6 @@
       submit () {
         const name = this.name
         const password = this.password
-        const alarmtext = this.alarmtext
         if (name !== '' && password !== '') {
           const data = {
             name: name,

@@ -4,5 +4,146 @@
   top:0;
   right:0;
   bottom:0;
-  background: white;
+  background: grey;
+  .header {
+    width: 100%;
+    line-height: 125px;
+    color: white;
+    background: grey;
+    text-align: center;
+    .title {
+      font-size: 40px;
+      font-weight: 200;
+    }
+  }
+  .chat-room{
+    width:70%;
+    margin:0 auto;
+    background: white;
+    border-radius: 5px;
+    padding-bottom: 20px;
+    .input-msg{
+      padding-left: 20px;
+      padding-right: 20px;
+      input{
+        width: 100%;
+      }
+      button{
+
+      }
+    }
+    .chat-title{
+      line-height:60px;
+      color: grey;
+      font-size: 20px;
+      font-weight: 200;
+      span:first-of-type{
+        margin-left: 5%;
+      }
+      span:last-of-type{
+        margin-left: 40%;
+      }
+    }
+    .chatting{
+      overflow: scroll;
+      height: 450px;
+      padding:20px 20px 20px 20px;
+      .other{
+        width:100%;
+        margin-bottom: 20px;
+        .other-img{
+          border-radius: 50px;
+          width:50px;
+          height: 50px;
+          overflow: hidden;
+          img{
+            width:50px;
+            height: 50px;
+          }
+        }
+        .other-name{
+          color: black;
+          font-weight: 200;
+          font-size: 12px;
+          width:50px;
+          text-align: center;
+        }
+        .other-msg{
+          margin-top: 20px;
+          font-size: 12px;
+          .box{
+            color: white;
+            max-width: 200px;
+            min-height: 20px;
+            line-height: 20px;
+            position: relative;
+            padding-left: 6px;
+            padding-right: 6px;
+            border-radius: 3px;
+            border:1px solid lightgrey;
+            background: lightgrey;
+            .little{
+              background: lightgrey;
+              position: absolute;
+              width:10px;
+              height: 10px;
+              top:20%;
+              left:-5px;
+              transform: rotate(45deg);
+              z-index: 10;
+              border:1px solid lightgrey;
+            }
+          }
+        }
+      }
+      .me{
+        width:100%;
+        margin-bottom: 20px;
+        .me-img{
+          border-radius: 50px;
+          width:50px;
+          height: 50px;
+          overflow: hidden;
+          img{
+            width:50px;
+            height: 50px;
+          }
+        }
+        .me-name{
+          color: black;
+          font-weight: 200;
+          font-size: 12px;
+          width:50px;
+          text-align: center;
+        }
+        .me-msg{
+          margin-top: 20px;
+          font-size: 12px;
+          .box{
+            color: white;
+            max-width: 200px;
+            min-height: 20px;
+            line-height: 20px;
+            position: relative;
+            padding-left: 6px;
+            padding-right: 6px;
+            border-radius: 3px;
+            border:1px solid lightgrey;
+            background: lightgrey;
+            .little{
+              background: lightgrey;
+              position: absolute;
+              width:10px;
+              height: 10px;
+              top:20%;
+              right:-5px;
+              transform: rotate(45deg);
+              z-index: 10;
+              border:1px solid lightgrey;
+            }
+          }
+        }
+      }
+    }
+  }
 }

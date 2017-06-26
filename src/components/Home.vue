@@ -1,23 +1,29 @@
 <template>
   <div class="home">
-    <div class="header">
-      <div class="title">Vue聊天室</div>
-      <div class="logout"><button @click="logout">退出登录</button></div>
-    </div>
-    <div class="chatroomlist">
-      <div @click="goToRoom('room1')">
-        <img src="" alt="">
-        <div>聊天室一</div>
-      </div>
-      <div @click="goToRoom('room2')">
-        <img src="" alt="">
-        <div>聊天室二</div>
-      </div>
-      <div @click="goToRoom('room3')">
-        <img src="" alt="">
-        <div>聊天室三</div>
-      </div>
-    </div>
+    <Row class="header">
+      <Col span="20" class="title">Vue聊天室</Col>
+      <Col span="4" class="logout"><div class="logout-btn" @click="logout">退出登录</div></Col>
+    </Row>
+    <Row class="chatroomlist">
+      <Col span="6" >
+        <div class="img" @click="goToRoom('room1')">
+          <img src="../assets/img/room1.jpg" alt="">
+        </div>
+        <div class="roomid">聊天室一</div>
+      </Col>
+      <Col span="6">
+        <div class="img"  @click="goToRoom('room2')">
+          <img src="../assets/img/room2.jpg" alt="">
+        </div>
+        <div class="roomid">聊天室二</div>
+      </Col>
+      <Col span="6">
+        <div class="img" @click="goToRoom('room3')" >
+          <img src="../assets/img/room3.jpg" alt="">
+        </div>
+        <div class="roomid">聊天室三</div>
+      </Col>
+    </Row>
   </div>
 </template>
 

@@ -20,7 +20,6 @@ const store = new Vuex.Store({
     messhistory: {
       infos: []
     },
-    alarmtext: '',
     chattoggle: false,
     logintoggle: false,
     registertoggle: true
@@ -28,7 +27,6 @@ const store = new Vuex.Store({
   getters: {
     getsocket: state => state.socket,
     getusername: state => state.user.name,
-    getalarmtext: state => state.alarmtext,
     getuserimgsrc: state => state.user.imgsrc,
     getuserroomid: state => state.user.roomid,
     getid: state => state.roomdetail.id,
@@ -78,9 +76,6 @@ const store = new Vuex.Store({
     },
     closeregistertoggle (state) {
       state.registertoggle = false
-    },
-    setalarmtext (state, data) {
-      state.alarmtext = data
     }
   },
   actions: {

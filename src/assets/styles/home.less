@@ -23,5 +23,49 @@ time, mark, audio, video, input {
   left:0;
   top:0;
   right:0;
-  bottom:0
+  bottom:0;
+  .header{
+    width:100%;
+    line-height:125px;
+    color:white;
+    background: grey;
+    padding-left: 60px;
+    padding-right: 60px;
+    margin-bottom: 60px;
+    .title{
+      font-size: 40px;
+      font-weight: 200;
+    }
+    .logout{
+      .logout-btn{
+        float: right;
+        cursor: pointer;
+      }
+    }
+  }
+  .chatroomlist{
+    width:100%;
+    padding-left: 60px;
+    padding-right: 60px;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    .img{
+      margin:0 auto;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      width:100px;
+      height: 100px;
+      overflow: hidden;
+      img{
+        width:100%;
+        height: 100px;
+      }
+    }
+    .roomid{
+      color: grey;
+      font-weight: 200;
+      font-size: 16px;
+    }
+  }
 }
